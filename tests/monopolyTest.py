@@ -49,4 +49,3 @@ def correct(test):
 	test.test = testMethod
 	test.description = lambda : "prints the correct number of throws to buy everything"
 	test.fail = lambda info : "hint: make sure the number of throws is on the first line of the output"
-	test.timeout = lambda : 15
