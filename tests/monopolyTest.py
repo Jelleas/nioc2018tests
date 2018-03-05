@@ -44,8 +44,12 @@ def correct(test):
 			overwriteAttributes = [("__name__", "__main__")]
 		)
 		line = lib.getLine(output, 0)
-		return asserts.numberOnLine(147, line, deviation = 5)
+		testResult = asserts.numberOnLine(147, line, deviation = 5)
+
+		if not testResult and asserts.numberOnLine(147, output, deviation = 5):
+			test.fail = lambda info : "hint: make sure the number of throws is on the first line of the output"
+
+		return testResult
 
 	test.test = testMethod
 	test.description = lambda : "prints the correct number of throws to buy everything"
-	test.fail = lambda info : "hint: make sure the number of throws is on the first line of the output"
