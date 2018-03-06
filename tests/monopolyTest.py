@@ -5,7 +5,7 @@ import checkpy.assertlib as asserts
 @t.test(0)
 def throwAvg(test):
 	def testMethod():
-		throw = lib.getFunction("throw", _fileName)
+		throw = lib.getFunction("throw", test.fileName)
 		n = 10000
 		s = sum(throw() for i in range(n))
 		return asserts.between(s / n, 6.5, 7.5)
@@ -16,7 +16,7 @@ def throwAvg(test):
 @t.test(10)
 def throwNums(test):
 	def testMethod():
-		throw = lib.getFunction("throw", _fileName)
+		throw = lib.getFunction("throw", test.fileName)
 		return asserts.containsOnly([throw() for i in range(10000)], list(range(2,13)))
 
 	test.test = testMethod
@@ -25,7 +25,7 @@ def throwNums(test):
 @t.test(20)
 def throwEvenDist(test):
 	def testMethod():
-		throw = lib.getFunction("throw", _fileName)
+		throw = lib.getFunction("throw", test.fileName)
 		throws = [throw() for i in range(100000)]
 		dist = [0] * 13
 		for t in throws:
@@ -40,7 +40,7 @@ def throwEvenDist(test):
 def correct(test):
 	def testMethod():
 		output = lib.outputOf(
-			_fileName,
+			test.fileName,
 			overwriteAttributes = [("__name__", "__main__")]
 		)
 		line = lib.getLine(output, 0)
